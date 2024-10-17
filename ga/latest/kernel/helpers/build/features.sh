@@ -42,7 +42,11 @@ if [ "$SSL" == "true" ] || [ "$TLS" == "true" ]; then
 fi
 
 # Install necessary features using featureUtility
+if [ "$VERBOSE" == "true" ]; then
+featureUtility installServerFeatures --acceptLicense defaultServer --noCache --verbose
+else
 featureUtility installServerFeatures --acceptLicense defaultServer --noCache
+fi
 find /opt/ibm/wlp/lib /opt/ibm/wlp/bin ! -perm -g=rw -print0 | xargs -0 -r chmod g+rw
 
 echo "features.sh script has been run" > /logs/features.log
